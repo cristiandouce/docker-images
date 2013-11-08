@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo "=> Looking for provisioner"
+PROVISIONER=`traceroute -m 1 -n 8.8.8.8 | awk '{ print $2 }' | egrep "^[0-9]"`
+
+echo "=> Requesting boot.sh and booting"
+curl -s http://$PROVISIONER:3000/container/boot.sh | sh
